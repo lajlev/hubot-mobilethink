@@ -71,6 +71,3 @@ module.exports = (robot) ->
   robot.hear /foos\sshow/i, (msg) ->
     init msg
     showLineup msg
-
-  robot.hear /foos\stable/i, (msg) ->
-    msg.send process.env.HUBOT_FOOS_TABLE
