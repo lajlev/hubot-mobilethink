@@ -42,7 +42,7 @@ module.exports = (robot) ->
       .get() (err, res, body) ->
         try
           json = JSON.parse(body)
-          msg.send "#{intro[randomIntroString]} #{positiveWords[randomPositiveWordString]} #{json.results.collection1[0].menu}\n
+          msg.send msg.random intro " #{positiveWords[randomPositiveWordString]} #{json.results.collection1[0].menu}\n
 Side dishes: #{json.results.collection1[1].menu} · #{json.results.collection1[2].menu} · #{json.results.collection1[3].menu} · #{json.results.collection1[4].menu}"
         catch error
           msg.send "Lunch menu couldn't be found"
