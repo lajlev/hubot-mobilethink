@@ -3,6 +3,8 @@
 # lunch - returns lunch menu details if it exists
 #
 
+provider = "MuMs"
+
 positiveWords = [
   "an appealing",
   "a beautiful",
@@ -22,6 +24,15 @@ positiveWords = [
   "a juicy"
 ]
 
+intro = [
+  "Today #{provider} is serving us",
+  "It's gonna be wild. Today #{provider} is serving us",
+  "Jackpot. #{provider} is presenting us",
+  "#{provider} has created",
+  "Today #{provider} is serving us",
+  "Today #{provider} is serving us",
+]
+randomIntroString = Math.floor(Math.random() * intro.length)
 randomPositiveWordString = Math.floor(Math.random() * positiveWords.length)
 
 module.exports = (robot) ->
@@ -31,6 +42,7 @@ module.exports = (robot) ->
       .get() (err, res, body) ->
         try
           json = JSON.parse(body)
-          msg.send "~ Today MuMs is serving us #{positiveWords[randomPositiveWordString]} #{json.results.collection1[0].menu} with #{json.results.collection1[1].menu}, #{json.results.collection1[2].menu}. Along with #{json.results.collection1[3].menu}, #{json.results.collection1[4].menu}"
+          msg.send "#{intro[randomIntroString]} #{positiveWords[randomPositiveWordString]} #{json.results.collection1[0].menu}\n
+Side dishes: #{json.results.collection1[1].menu} · #{json.results.collection1[2].menu} · #{json.results.collection1[3].menu} · #{json.results.collection1[4].menu}"
         catch error
           msg.send "Lunch menu couldn't be found"
