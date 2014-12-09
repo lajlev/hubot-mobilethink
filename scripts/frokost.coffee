@@ -10,15 +10,14 @@ module.exports = (robot) ->
       .get() (err, res, body) ->
         try
           json = JSON.parse(body)
-          msg.send "   ~ Todays Menu ~\n
+          msg.send "~ Todays Menu ~\n
           \n
-     Hot dish: #{json.results.collection1[0].menu}\n
-        Salat: #{json.results.collection1[1].menu}\n
-  Green salat: #{json.results.collection1[2].menu}\n
-    Cold cuts: #{json.results.collection1[3].menu}\n
-       Cheese: #{json.results.collection1[4].menu}\n
-       \n
-       \n
-               Source: http://e.frokost.dk/menu/6OKBMXsAjS"
+Hot dish: #{json.results.collection1[0].menu}\n
+Salat: #{json.results.collection1[1].menu}\n
+Green salat: #{json.results.collection1[2].menu}\n
+Cold cuts: #{json.results.collection1[3].menu}\n
+Cheese: #{json.results.collection1[4].menu}\n
+\n
+Source: http://e.frokost.dk/menu/6OKBMXsAjS"
         catch error
           msg.send "Lunch menu couldn't be found"
