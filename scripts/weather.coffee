@@ -34,7 +34,7 @@ lookupWeather = (msg, coords, err) ->
 
   url = forecastIoUrl + coords.lat + ',' + coords.lng
 
-  msg.http(url).query(units: 'ca').get() (err, res, body) ->
+  msg.http(url).query(units: 'si').get() (err, res, body) ->
     return msg.send 'Could not get weather data' if err
     try
       body = JSON.parse body
@@ -51,7 +51,7 @@ lookupForecast = (msg, coords, err) ->
   return msg.send "You need to set env.HUBOT_FORECAST_API_KEY to get weather data" if not env.HUBOT_FORECAST_API_KEY
 
   url = forecastIoUrl + coords.lat + ',' + coords.lng
-  msg.http(url).query(units: 'ca').get() (err, res, body) ->
+  msg.http(url).query(units: 'si').get() (err, res, body) ->
     return msg.send 'Could not get weather forecast' if err
     try
       body = JSON.parse body
