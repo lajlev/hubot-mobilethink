@@ -50,7 +50,6 @@ module.exports = (robot) ->
           randomIntroString = Math.floor(Math.random() * intro.length)
           randomPositiveWordString = Math.floor(Math.random() * positiveWords.length)
           json = JSON.parse(body)
-          msg.send "#{intro[randomIntroString]} #{positiveWords[randomPositiveWordString]} #{json.results.frokost[0].weekday}\n"
-
+          msg.send "#{intro[randomIntroString]} #{positiveWords[randomPositiveWordString]} #{json.results.frokost[0].wed}\n"
         catch error
           msg.send "Lunch menu couldn't be found"
