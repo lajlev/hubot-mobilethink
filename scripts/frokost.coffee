@@ -3,7 +3,7 @@
 # lunch - returns lunch menu details if it exists
 #
 
-provider = "MuMs"
+provider = "MuMs!"
 
 positiveWords = [
   "an appealing",
@@ -24,6 +24,15 @@ positiveWords = [
   "a juicy"
 ]
 
+
+weekdays = [
+  "sun", "mon", "tue", "wed", "thu", "fri","sat"
+]
+
+  
+date = new Date()
+weekday = weekday[date.getDay()]
+
 intro = [
   "Today #{provider} is serving us",
   "It's gonna be wild. Today #{provider} is serving us",
@@ -35,14 +44,16 @@ intro = [
 
 module.exports = (robot) ->
   robot.respond /lunch|todays lunch|lunch today|lunch menu/i, (msg) ->
-    gemname = escape(msg.match[1])
     msg.http("https://www.kimonolabs.com/api/9adlhc7g?apikey=c8f9ab2a3136ece150fbb950c58ab214")
       .get() (err, res, body) ->
         try
           randomIntroString = Math.floor(Math.random() * intro.length)
           randomPositiveWordString = Math.floor(Math.random() * positiveWords.length)
           json = JSON.parse(body)
-          msg.send "#{intro[randomIntroString]} #{positiveWords[randomPositiveWordString]} #{json.results.collection1[0].menu}\n
-Side dishes: #{json.results.collection1[1].menu} · #{json.results.collection1[2].menu} · #{json.results.collection1[3].menu} · #{json.results.collection1[4].menu}"
+          msg.send "#{intro[randomIntroString]} #{positiveWords[randomPositiveWordString]} #{json.results.frokost[0].menu}\n
+          " + $.each data.results.frokost, (i, item) ->
+            " · " + item[weekday]
+            return
+
         catch error
           msg.send "Lunch menu couldn't be found"
