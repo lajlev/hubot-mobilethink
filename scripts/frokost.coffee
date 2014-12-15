@@ -42,7 +42,8 @@
 #   "Today #{provider} is serving us",
 # ]
 
-module.exports = (robot) ->
+module.exports
+# = (robot) ->
 #   robot.respond /lunch|todays lunch|lunch today|lunch menu/i, (msg) ->
 #     msg.http("https://www.kimonolabs.com/api/9adlhc7g?apikey=c8f9ab2a3136ece150fbb950c58ab214")
 #       .get() (err, res, body) ->
