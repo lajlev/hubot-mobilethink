@@ -64,6 +64,7 @@ module.exports = (robot) ->
                 .replace(/&#216;/g, "Ø")
                 .replace(/&#229;/g, "å")
                 .replace(/&#197;/g, "Å")
+                .replace(/&amp;/g, "&")
                 .trim()
 
     # msg.http("https://www.kimonolabs.com/api/9adlhc7g?apikey=c8f9ab2a3136ece150fbb950c58ab214")
