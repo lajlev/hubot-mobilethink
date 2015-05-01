@@ -16,8 +16,6 @@
 # Author:
 #   Michael Lajlev
 
-parser = require 'parse-rss'
-
 # provider = "MuMs!"
 
 # positiveWords = [
@@ -49,13 +47,17 @@ parser = require 'parse-rss'
 #   "Today #{provider} is serving us",
 # ]
 
-url    = "http://e.frokost.dk/Menuplan/RssMenu.aspx?l=6OKBMXsAjS"
+parser = require 'parse-rss'
+
+url = "http://e.frokost.dk/Menuplan/RssMenu.aspx?l=6OKBMXsAjS"
 
 module.exports = (robot) ->
   robot.respond /lunch|todays lunch|lunch today|lunch menu/i, (msg) ->
     parser url, (err,rss)->
-      msg.send err if err
-      msg.send rss[0].description
+      rssDesc = rss[0].description
+      if rssDesc != null and rssDesc.length < 1
+        msg.send err if err
+        msg.send rssDesc
                 .replace(/<\/?b>/g, "")
                 .replace(/<br\/>/g, "\n")
                 .replace(/&#230;/g, "æ")
@@ -66,6 +68,8 @@ module.exports = (robot) ->
                 .replace(/&#197;/g, "Å")
                 .replace(/&amp;/g, "&")
                 .trim()
+      else
+        msg.send "No lunch today"
 
     # msg.http("https://www.kimonolabs.com/api/9adlhc7g?apikey=c8f9ab2a3136ece150fbb950c58ab214")
     #   .get() (err, res, body) ->
